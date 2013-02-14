@@ -69,10 +69,12 @@ root.getValueVendorPrefix = function(property, value) {
     document.body.appendChild(elem);
     var styles = ["-webkit-", "-moz-", "-o-", "-ms-", ""];
     var _property = getVendorPrefix(property) + property;
+    
     for (var i=0, length = styles.length; i < length; i++) {
         var _value = styles[i] + value;
         elem.setAttribute('style', _property + ": " + _value);
-        var _computed = computedStyle(elem, _property);
+        var _computed = window.getComputedStyle(elem, null)
+            .getPropertyValue(_propert);
         if (_computed && _computed !== 'none') {
             document.body.removeChild(elem);
             return styles[i];
